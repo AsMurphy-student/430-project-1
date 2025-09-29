@@ -1,5 +1,4 @@
-// Users array
-const users = {};
+const bookData = require('./data/books.json');
 
 // Send JSON response
 const respondJSON = (request, response, status, object) => {
@@ -20,16 +19,16 @@ const respondJSON = (request, response, status, object) => {
 };
 
 // Get users handler
-const getUsers = (request, response) => {
+const getBooks = (request, response) => {
   const responseJSON = {
-    users,
+    bookData,
   };
 
   return respondJSON(request, response, 200, responseJSON);
 };
 
-// Add user handler
-const addUser = (request, response) => {
+// Add book handler
+const addBook = (request, response) => {
   const responseJSON = {
     message: 'Name and age are both required.',
   };
@@ -61,6 +60,6 @@ const addUser = (request, response) => {
 };
 
 module.exports = {
-  getUsers,
-  addUser,
+  getBooks,
+  addBook,
 };
