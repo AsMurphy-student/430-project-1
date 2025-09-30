@@ -26,29 +26,46 @@
           break;
       }
 
-      if (parseResponse) {
-        const obj = await response.json();
+      // if (parseResponse) {
+      //   const obj = await response.json();
 
-        if(obj.message){
-          content.innerHTML += `<p>Message: ${obj.message}</p>`;
-        }
-        else if(obj.users){
-          content.innerHTML += `<p>${JSON.stringify(obj.users)}</p>`;
-        }
-      }
+      //   if(obj.message){
+      //     content.innerHTML += `<p>Message: ${obj.message}</p>`;
+      //   }
+      //   else if(obj.users){
+      //     content.innerHTML += `<p>${JSON.stringify(obj.users)}</p>`;
+      //   }
+      // }
     };
 
-    const sendPost = async (nameForm) => {
-      const url = nameForm.getAttribute('action');
-      const method = nameForm.getAttribute('method');
+    // Need to have
+    // author
+    // country
+    // language
+    // link
+    // pages
+    // title
+    // year
+    // genres array
+
+    const sendPost = async () => {
+      // const url = nameForm.getAttribute('action');
+      // const method = nameForm.getAttribute('method');
       
-      const nameField = nameForm.querySelector('#nameField');
-      const ageField = nameForm.querySelector('#ageField');
+      // Make sure when adding fields to do .value on the end as we just need the value
+      const authorField = 'cool author';
+      const countryField = 'cool country';
+      const languageField = 'probably english';
+      const linkField = 'really cool link';
+      const pagesField = '10000';
+      const titleField = 'awesome title';
+      const yearField = '2025';
+      const genresField = 'happy,sad';
 
-      const formData = `name=${nameField.value}&age=${ageField.value}`;
+      const formData = `author=${authorField}&country=${countryField}&language=${languageField}&link=${linkField}&pages=${pagesField}&title=${titleField}&year=${yearField}&genres=${genresField}`;
 
-      const response = await fetch(url, {
-        method: method,
+      const response = await fetch('/addBook', {
+        method: 'post',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json',
@@ -74,23 +91,24 @@
     };
 
     const init = () => {
-      const nameForm = document.querySelector('#nameForm');
-      const userForm = document.querySelector('#userForm');
+      // const nameForm = document.querySelector('#nameForm');
+      // const userForm = document.querySelector('#userForm');
 
-      const addUser = (e) => {
-        e.preventDefault();
-        sendPost(nameForm);
-        return false;
-      }
+      // const addBook = (e) => {
+      //   e.preventDefault();
+      //   sendPost(nameForm);
+      //   return false;
+      // }
 
-      const getUsers = (e) => {
-        e.preventDefault();
-        requestUpdate(userForm);
-        return false;
-      }
+      // const getBooks = (e) => {
+      //   e.preventDefault();
+      //   requestUpdate(userForm);
+      //   return false;
+      // }
 
-      nameForm.addEventListener('submit', addUser);
-      userForm.addEventListener('submit', getUsers);
+      // nameForm.addEventListener('submit', addUser);
+      // userForm.addEventListener('submit', getUsers);
+      document.getElementById('test-button').addEventListener('click', sendPost)
     };
 
     window.onload = init;
@@ -98,7 +116,7 @@
   </script>
 </head>
 <body>
-  <section id="top">
+  <!-- <section id="top">
     <h3>POST Status Code Tests</h3>
     <form id="nameForm" action="/addUser" method="post">
       <label for="name">Name: </label>
@@ -118,7 +136,8 @@
       </select>
       <input type="submit" value="Get User" />
     </form>
-  </section>
+  </section> -->
+  <button id="test-button">test add user</button>
   <section id="content">
   </section>
 </body>

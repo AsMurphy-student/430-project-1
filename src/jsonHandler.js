@@ -35,6 +35,7 @@ const addBook = (request, response) => {
 
   // Need to have
   // author
+  // country
   // language
   // link
   // pages
