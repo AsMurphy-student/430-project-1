@@ -45,12 +45,10 @@ const addBook = (request, response) => {
 
   const { author, country, language, link, pages, title, year, genres } = request.body;
 
-  if (!author || !country || !language || !link || !pages || !title || !year || !genres) {
+  if (!author || !country || !language || !link || !pages || !title || !year) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
-
-  const genreArray = genres.split(',');
 
   const newBook = {
     author,
@@ -60,28 +58,48 @@ const addBook = (request, response) => {
     pages,
     title,
     year,
-    genreArray,
   }
 
-  console.log(newBook);
-
-  let responseCode = 204;
-
-  if (!users[name]) {
-    responseCode = 201;
-    users[name] = {
-      name,
-    };
+  if (genres) {
+    newBook.genres = genres.split(',');
   }
 
-  users[name].age = age;
+  // console.log(newBook);
 
-  if (responseCode === 201) {
-    responseJSON.message = 'Created Successfully';
-    return respondJSON(request, response, responseCode, responseJSON);
+  // let responseCode = 201;
+
+  let updated = false;
+
+  bookData.map((element, index) => {
+    if (element.title === newBook.title) {
+      bookData[index] = newBook;
+
+      respondJSON(request, response, 204, {});
+      updated = true;
+    }
+  });
+
+  if (updated) {
+    return;
   }
 
-  return respondJSON(request, response, responseCode, {});
+  bookData.push(newBook);
+
+  // if (!bookData[name]) {
+  //   responseCode = 201;
+  //   users[name] = {
+  //     name,
+  //   };
+  // }
+
+  // users[name].age = age;
+
+  // if (responseCode === 201) {
+  // responseJSON.message = 'Created Successfully';
+  return respondJSON(request, response, 201, "Created Successfully");
+  // }
+
+  // return respondJSON(request, response, responseCode, {});
 };
 
 module.exports = {
