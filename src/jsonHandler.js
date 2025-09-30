@@ -1,4 +1,4 @@
-const bookData = require('./data/books.json');
+let bookData = require('./data/books.json');
 
 // Send JSON response
 const respondJSON = (request, response, status, object) => {
@@ -18,7 +18,7 @@ const respondJSON = (request, response, status, object) => {
   response.end();
 };
 
-// Get users handler
+// Get books handler
 const getBooks = (request, response) => {
   const responseJSON = {
     bookData,
@@ -33,9 +33,18 @@ const addBook = (request, response) => {
     message: 'Name and age are both required.',
   };
 
-  const { name, age } = request.body;
+  // Need to have
+  // author
+  // language
+  // link
+  // pages
+  // title
+  // year
+  // genres array
 
-  if (!name || !age) {
+  const { author, language, link, pages, title, year, genres } = request.body;
+
+  if (!author || !language || !link || !pages || !title || !year || !genres) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
