@@ -42,12 +42,27 @@ const addBook = (request, response) => {
   // year
   // genres array
 
-  const { author, language, link, pages, title, year, genres } = request.body;
+  const { author, country, language, link, pages, title, year, genres } = request.body;
 
-  if (!author || !language || !link || !pages || !title || !year || !genres) {
+  if (!author || !country || !language || !link || !pages || !title || !year || !genres) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
+
+  const genreArray = genres.split(',');
+
+  const newBook = {
+    author,
+    country,
+    language,
+    link,
+    pages,
+    title,
+    year,
+    genreArray,
+  }
+
+  console.log(newBook);
 
   let responseCode = 204;
 
