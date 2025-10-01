@@ -102,6 +102,67 @@ const addBook = (request, response) => {
   // return respondJSON(request, response, responseCode, {});
 };
 
+// Add Genre Handler
+const addGenre = (request, response) => {
+  const responseJSON = {
+    message: 'Name and age are both required.',
+  };
+
+  // Need to have
+  // title
+  // genre
+
+  const { title, genre } = request.body;
+
+  if (!title || !genre) {
+    responseJSON.id = 'missingParams';
+    return respondJSON(request, response, 400, responseJSON);
+  }
+
+  const newBook = {}
+
+  if (genres) {
+    newBook.genres = genres.split(',');
+  }
+
+  // console.log(newBook);
+
+  // let responseCode = 201;
+
+  let updated = false;
+
+  bookData.map((element, index) => {
+    if (element.title === newBook.title) {
+      bookData[index] = newBook;
+
+      respondJSON(request, response, 204, {});
+      updated = true;
+    }
+  });
+
+  if (updated) {
+    return;
+  }
+
+  bookData.push(newBook);
+
+  // if (!bookData[name]) {
+  //   responseCode = 201;
+  //   users[name] = {
+  //     name,
+  //   };
+  // }
+
+  // users[name].age = age;
+
+  // if (responseCode === 201) {
+  // responseJSON.message = 'Created Successfully';
+  return respondJSON(request, response, 201, "Created Successfully");
+  // }
+
+  // return respondJSON(request, response, responseCode, {});
+};
+
 module.exports = {
   getBooks,
   addBook,

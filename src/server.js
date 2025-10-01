@@ -41,6 +41,9 @@ const handlePost = (request, response, parsedUrl) => {
   if (parsedUrl.pathname === '/addBook') {
     parseBody(request, response, jsonHandler.addBook);
   }
+  else if (parsedUrl.pathname === '/addGenre') {
+    parseBody(request, response, jsonHandler.addGenre);
+  }
 };
 
 // Handle get requests
