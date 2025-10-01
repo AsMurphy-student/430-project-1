@@ -130,6 +130,9 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 404, "Book not Found.");
   }
   else if (selectedBook.genres) {
+    if (!selectedBook.genres.includes(genre)) {
+      return respondJSON(request, response, 404, "Genre already added.");
+    }
     selectedBook.genres.push(genre);
   }
   else {
