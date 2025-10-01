@@ -48,7 +48,7 @@
     // year
     // genres array
 
-    const sendPost = async () => {
+    const sendBookPost = async () => {
       // const url = nameForm.getAttribute('action');
       // const method = nameForm.getAttribute('method');
       
@@ -65,6 +65,28 @@
       const formData = `author=${authorField}&country=${countryField}&language=${languageField}&link=${linkField}&pages=${pagesField}&title=${titleField}&year=${yearField}&genres=${genresField}`;
 
       const response = await fetch('/addBook', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+        },
+        body: formData,
+      });
+
+      handleResponse(response, true);
+    };
+
+    const sendGenrePost = async () => {
+      // const url = nameForm.getAttribute('action');
+      // const method = nameForm.getAttribute('method');
+      
+      // Make sure when adding fields to do .value on the end as we just need the value
+      const titleField = 'awesome title';
+      const genreField = 'awesome';
+
+      const formData = `title=${titleField}&genre=${genreField}`;
+
+      const response = await fetch('/addGenre', {
         method: 'post',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -108,7 +130,8 @@
 
       // nameForm.addEventListener('submit', addUser);
       // userForm.addEventListener('submit', getUsers);
-      document.getElementById('test-button').addEventListener('click', sendPost)
+      document.getElementById('test-button').addEventListener('click', sendBookPost)
+      document.getElementById('test-button-second').addEventListener('click', sendGenrePost)
     };
 
     window.onload = init;
@@ -137,7 +160,8 @@
       <input type="submit" value="Get User" />
     </form>
   </section> -->
-  <button id="test-button">test add user</button>
+  <button id="test-button">test add book</button>
+  <button id="test-button-second">test add genre</button>
   <section id="content">
   </section>
 </body>

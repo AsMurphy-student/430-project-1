@@ -119,7 +119,7 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  const selectedBook = {}
+  let selectedBook = {}
   bookData.map((element) => {
     if (element.title === title) {
       selectedBook = element;
@@ -130,7 +130,7 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 404, "Book not Found.");
   }
   else if (selectedBook.genres) {
-    if (!selectedBook.genres.includes(genre)) {
+    if (selectedBook.genres.includes(genre)) {
       return respondJSON(request, response, 404, "Genre already added.");
     }
     selectedBook.genres.push(genre);
