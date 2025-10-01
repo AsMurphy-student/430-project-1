@@ -119,45 +119,30 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  const newBook = {}
-
-  if (genres) {
-    newBook.genres = genres.split(',');
-  }
-
-  // console.log(newBook);
-
-  // let responseCode = 201;
-
-  let updated = false;
-
-  bookData.map((element, index) => {
-    if (element.title === newBook.title) {
-      bookData[index] = newBook;
-
-      respondJSON(request, response, 204, {});
-      updated = true;
+  const selectedBook = {}
+  bookData.map((element) => {
+    if (element.title === title) {
+      selectedBook = element;
     }
   });
 
-  if (updated) {
-    return;
+  if (!selectedBook) {
+    return respondJSON(request, response, 404, "Book not Found.");
+  }
+  else if (selectedBook.genres) {
+    selectedBook.genres.push(genre);
+  }
+  else {
+    selectedBook.genres = [genre];
   }
 
-  bookData.push(newBook);
-
-  // if (!bookData[name]) {
-  //   responseCode = 201;
-  //   users[name] = {
-  //     name,
-  //   };
-  // }
+  return respondJSON(request, response, 204, {});
 
   // users[name].age = age;
 
   // if (responseCode === 201) {
   // responseJSON.message = 'Created Successfully';
-  return respondJSON(request, response, 201, "Created Successfully");
+  // return respondJSON(request, response, 201, "Created Successfully");
   // }
 
   // return respondJSON(request, response, responseCode, {});
@@ -166,4 +151,5 @@ const addGenre = (request, response) => {
 module.exports = {
   getBooks,
   addBook,
+  addGenre,
 };
