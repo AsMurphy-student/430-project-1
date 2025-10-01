@@ -6,12 +6,17 @@ const jsonHandler = require('./jsonHandler.js');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 // URL Struct
-const urlStruct = {
+const getStruct = {
   '/': htmlHandler.getIndex,
   '/style.css': htmlHandler.getCss,
   '/getBooks': jsonHandler.getBooks,
   notFound: htmlHandler.get404,
 };
+
+const postStruct = {
+  '/addBook': jsonHandler.addBook,
+  '/addGenre': jsonHandler.addGenre,
+}
 
 // Parse the body as packets are received
 // and call handler when all packets are received
@@ -37,19 +42,14 @@ const parseBody = (request, response, handler) => {
 };
 
 // Handle post requests
-const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addBook') {
-    parseBody(request, response, jsonHandler.addBook);
-  }
-  else if (parsedUrl.pathname === '/addGenre') {
-    parseBody(request, response, jsonHandler.addGenre);
-  }
-};
+const handlePost = (request, response, parsedUrl) => (postStruct[parsedUrl.pathname]
+  ? parseBody(request, response, postStruct[parsedUrl.pathname])
+  : getStruct.notFound(request, response));
 
 // Handle get requests
-const handleGet = (request, response, parsedUrl) => (urlStruct[parsedUrl.pathname]
-  ? urlStruct[parsedUrl.pathname](request, response)
-  : urlStruct.notFound(request, response));
+const handleGet = (request, response, parsedUrl) => (getStruct[parsedUrl.pathname]
+  ? getStruct[parsedUrl.pathname](request, response)
+  : getStruct.notFound(request, response));
 
 // On Request Function
 const onRequest = (request, response) => {
