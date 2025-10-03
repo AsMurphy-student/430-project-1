@@ -27,80 +27,52 @@ const getBooks = (request, response) => {
   return respondJSON(request, response, 200, responseJSON);
 };
 
-// Get books by title handler
-const getBooksByTitle = (request, response) => {
-  if (!request.query.title) {
+// Get Query Helper Function
+const getBooksByQuery = (request, response, query, queryString) => {
+  if (!query) {
     return respondJSON(request, response, 400, {
       id: 'noQueryProvided',
       message: 'No title to query was provided.',
     });
   }
 
-  const booksByTitle = bookData.filter(element => element.title == request.query.title);
+  let booksByQuery = [];
 
-  if (booksByTitle.length <= 0) {
+  if (queryString === 'title') {
+    booksByQuery = bookData.filter(element => element.title == query);
+  }
+  else if (queryString === 'author') {
+    booksByQuery = bookData.filter(element => element.author == query);
+  }
+  else if (queryString === 'year') {
+    booksByQuery = bookData.filter(element => element.year == query);
+  }
+
+  if (booksByQuery.length <= 0) {
     return respondJSON(request, response, 400, {
       id: 'noResults',
-      message: 'No books published under author provided.',
+      message: `No books published under ${queryString} provided.`,
     });
   }
 
   const responseJSON = {
-    booksByTitle,
+    booksByQuery,
   };
 
   return respondJSON(request, response, 200, responseJSON);
 };
+
+// Get books by title handler
+const getBooksByTitle = (request, response) => 
+  getBooksByQuery(request, response, request.query.title, "title");
 
 // Get books by author handler
-const getBooksByAuthor = (request, response) => {
-  if (!request.query.author) {
-    return respondJSON(request, response, 400, {
-      id: 'noQueryProvided',
-      message: 'No author to query was provided.',
-    });
-  }
-
-  const booksByAuthor = bookData.filter(element => element.author == request.query.author);
-
-  if (booksByAuthor.length <= 0) {
-    return respondJSON(request, response, 400, {
-      id: 'noResults',
-      message: 'No books published under author provided.',
-    });
-  }
-
-  const responseJSON = {
-    booksByAuthor,
-  };
-
-  return respondJSON(request, response, 200, responseJSON);
-};
+const getBooksByAuthor = (request, response) => 
+  getBooksByQuery(request, response, request.query.author, "author");
 
 // Get books by year handler
-const getBooksByYear = (request, response) => {
-  if (!request.query.year) {
-    return respondJSON(request, response, 400, {
-      id: 'noQueryProvided',
-      message: 'No year to query was provided.',
-    });
-  }
-
-  const booksByYear = bookData.filter(element => element.year == request.query.year);
-
-  if (booksByYear.length <= 0) {
-    return respondJSON(request, response, 400, {
-      id: 'noResults',
-      message: 'No books published under year provided.',
-    });
-  }
-
-  const responseJSON = {
-    booksByYear,
-  };
-
-  return respondJSON(request, response, 200, responseJSON);
-};
+const getBooksByYear = (request, response) => 
+  getBooksByQuery(request, response, request.query.year, "year");
 
 // Add book handler
 const addBook = (request, response) => {
