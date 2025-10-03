@@ -1,4 +1,4 @@
-let bookData = require('./data/books.json');
+const bookData = require('./data/books.json');
 
 // Send JSON response
 const respondJSON = (request, response, status, object) => {
@@ -43,7 +43,9 @@ const addBook = (request, response) => {
   // year
   // genres array
 
-  const { author, country, language, link, pages, title, year, genres } = request.body;
+  const {
+    author, country, language, link, pages, title, year, genres,
+  } = request.body;
 
   if (!author || !country || !language || !link || !pages || !title || !year) {
     responseJSON.id = 'missingParams';
@@ -58,7 +60,7 @@ const addBook = (request, response) => {
     pages,
     title,
     year,
-  }
+  };
 
   if (genres) {
     newBook.genres = genres.split(',');
@@ -74,13 +76,14 @@ const addBook = (request, response) => {
     if (element.title === newBook.title) {
       bookData[index] = newBook;
 
-      respondJSON(request, response, 204, {});
       updated = true;
+      respondJSON(request, response, 204, {});
     }
+    return 0;
   });
 
   if (updated) {
-    return;
+    return 0;
   }
 
   bookData.push(newBook);
@@ -96,7 +99,7 @@ const addBook = (request, response) => {
 
   // if (responseCode === 201) {
   // responseJSON.message = 'Created Successfully';
-  return respondJSON(request, response, 201, "Created Successfully");
+  return respondJSON(request, response, 201, 'Created Successfully');
   // }
 
   // return respondJSON(request, response, responseCode, {});
@@ -119,23 +122,24 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  let selectedBook = {}
+  let selectedBook = {};
   bookData.map((element) => {
     if (element.title === title) {
       selectedBook = element;
     }
+
+    return 0;
   });
 
   if (!selectedBook) {
-    return respondJSON(request, response, 404, "Book not Found.");
+    return respondJSON(request, response, 404, 'Book not Found.');
   }
-  else if (selectedBook.genres) {
+  if (selectedBook.genres) {
     if (selectedBook.genres.includes(genre)) {
-      return respondJSON(request, response, 404, "Genre already added.");
+      return respondJSON(request, response, 404, 'Genre already added.');
     }
     selectedBook.genres.push(genre);
-  }
-  else {
+  } else {
     selectedBook.genres = [genre];
   }
 

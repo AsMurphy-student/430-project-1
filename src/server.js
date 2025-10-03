@@ -16,7 +16,7 @@ const getStruct = {
 const postStruct = {
   '/addBook': jsonHandler.addBook,
   '/addGenre': jsonHandler.addGenre,
-}
+};
 
 // Parse the body as packets are received
 // and call handler when all packets are received
