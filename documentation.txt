@@ -1,0 +1,6 @@
+1. I am using the books data set that you provided.
+2. I have get requests setup for all books, query get requests for title, author, and year, and have post requests for submitting a book/updating a book, and a post request for adding a new genre to a book's genre array if or if it does not have one.
+3. I just have the client completed. I plan on making a super basic client page to confirm everything works, then I may back a better client page in React which I use more frequently.
+4. I have no plan for going above and beyond besides maybe the client being made in React if that counts. I am focusing on meeting the requirements first.
+5. The only code I have used is from you. I used HTTP 2 assignment as a starting point. The new code is just written by me with my Javascript knowledge.
+
