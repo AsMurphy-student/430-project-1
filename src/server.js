@@ -10,6 +10,9 @@ const getStruct = {
   '/': htmlHandler.getIndex,
   '/style.css': htmlHandler.getCss,
   '/getBooks': jsonHandler.getBooks,
+  '/getBooksByTitle': jsonHandler.getBooksByTitle,
+  '/getBooksByAuthor': jsonHandler.getBooksByAuthor,
+  '/getBooksByYear': jsonHandler.getBooksByYear,
   notFound: htmlHandler.get404,
 };
 

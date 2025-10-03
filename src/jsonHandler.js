@@ -27,6 +27,81 @@ const getBooks = (request, response) => {
   return respondJSON(request, response, 200, responseJSON);
 };
 
+// Get books by title handler
+const getBooksByTitle = (request, response) => {
+  if (!request.query.title) {
+    return respondJSON(request, response, 400, {
+      id: 'noQueryProvided',
+      message: 'No title to query was provided.',
+    });
+  }
+
+  const booksByTitle = bookData.filter(element => element.title == request.query.title);
+
+  if (booksByTitle.length <= 0) {
+    return respondJSON(request, response, 400, {
+      id: 'noResults',
+      message: 'No books published under author provided.',
+    });
+  }
+
+  const responseJSON = {
+    booksByTitle,
+  };
+
+  return respondJSON(request, response, 200, responseJSON);
+};
+
+// Get books by author handler
+const getBooksByAuthor = (request, response) => {
+  if (!request.query.author) {
+    return respondJSON(request, response, 400, {
+      id: 'noQueryProvided',
+      message: 'No author to query was provided.',
+    });
+  }
+
+  const booksByAuthor = bookData.filter(element => element.author == request.query.author);
+
+  if (booksByAuthor.length <= 0) {
+    return respondJSON(request, response, 400, {
+      id: 'noResults',
+      message: 'No books published under author provided.',
+    });
+  }
+
+  const responseJSON = {
+    booksByAuthor,
+  };
+
+  return respondJSON(request, response, 200, responseJSON);
+};
+
+// Get books by year handler
+const getBooksByYear = (request, response) => {
+  if (!request.query.year) {
+    return respondJSON(request, response, 400, {
+      id: 'noQueryProvided',
+      message: 'No year to query was provided.',
+    });
+  }
+
+  const booksByYear = bookData.filter(element => element.year == request.query.year);
+
+  if (booksByYear.length <= 0) {
+    return respondJSON(request, response, 400, {
+      id: 'noResults',
+      message: 'No books published under year provided.',
+    });
+  }
+
+  const responseJSON = {
+    booksByYear,
+  };
+
+  return respondJSON(request, response, 200, responseJSON);
+};
+
 // Add book handler
 const addBook = (request, response) => {
   const responseJSON = {
@@ -157,6 +232,9 @@ const addGenre = (request, response) => {
 
 module.exports = {
   getBooks,
+  getBooksByTitle,
+  getBooksByAuthor,
+  getBooksByYear,
   addBook,
   addGenre,
 };
