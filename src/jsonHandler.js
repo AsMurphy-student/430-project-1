@@ -39,13 +39,11 @@ const getBooksByQuery = (request, response, query, queryString) => {
   let booksByQuery = [];
 
   if (queryString === 'title') {
-    booksByQuery = bookData.filter(element => element.title == query);
-  }
-  else if (queryString === 'author') {
-    booksByQuery = bookData.filter(element => element.author == query);
-  }
-  else if (queryString === 'year') {
-    booksByQuery = bookData.filter(element => element.year == query);
+    booksByQuery = bookData.filter((element) => element.title === query);
+  } else if (queryString === 'author') {
+    booksByQuery = bookData.filter((element) => element.author === query);
+  } else if (queryString === 'year') {
+    booksByQuery = bookData.filter((element) => element.year.toString() === query);
   }
 
   if (booksByQuery.length <= 0) {
@@ -63,16 +61,13 @@ const getBooksByQuery = (request, response, query, queryString) => {
 };
 
 // Get books by title handler
-const getBooksByTitle = (request, response) => 
-  getBooksByQuery(request, response, request.query.title, "title");
+const getBooksByTitle = (request, response) => getBooksByQuery(request, response, request.query.title, 'title');
 
 // Get books by author handler
-const getBooksByAuthor = (request, response) => 
-  getBooksByQuery(request, response, request.query.author, "author");
+const getBooksByAuthor = (request, response) => getBooksByQuery(request, response, request.query.author, 'author');
 
 // Get books by year handler
-const getBooksByYear = (request, response) => 
-  getBooksByQuery(request, response, request.query.year, "year");
+const getBooksByYear = (request, response) => getBooksByQuery(request, response, request.query.year, 'year');
 
 // Add book handler
 const addBook = (request, response) => {
