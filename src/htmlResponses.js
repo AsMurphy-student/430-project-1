@@ -1,7 +1,8 @@
 const fs = require('fs');
 
-const index = fs.readFileSync(`${__dirname}/../client/client.html`);
-const css = fs.readFileSync(`${__dirname}/../client/style.css`);
+const index = fs.readFileSync(`${__dirname}/../client/index.html`);
+const css = fs.readFileSync(`${__dirname}/../client/assets/index.css`);
+const js = fs.readFileSync(`${__dirname}/../client/assets/index.js`);
 
 // Send Response
 const respond = (request, response, code, content, type) => {
@@ -47,6 +48,12 @@ const getCss = (request, response) => {
   response.end();
 };
 
+const getJs = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/javascript' });
+  response.write(js);
+  response.end();
+};
+
 const get404 = (request, response) => {
   handleResponse(request, response, 404, 'The page you are looking for was not found.', 'notFound');
 };
@@ -54,5 +61,6 @@ const get404 = (request, response) => {
 module.exports = {
   getIndex,
   getCss,
+  getJs,
   get404,
 };
