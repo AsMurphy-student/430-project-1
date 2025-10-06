@@ -178,7 +178,7 @@ const addGenre = (request, response) => {
   }
   if (selectedBook.genres) {
     if (selectedBook.genres.includes(genre)) {
-      return respondJSON(request, response, 404, 'Genre already added.');
+      return respondJSON(request, response, 400, 'Genre already added.');
     }
     selectedBook.genres.push(genre);
   } else {
