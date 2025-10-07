@@ -119,7 +119,7 @@ const addBook = (request, response) => {
       bookData[index] = newBook;
 
       updated = true;
-      respondJSON(request, response, 204, {});
+      respondJSON(request, response, 204, newBook);
     }
     return 0;
   });
@@ -141,7 +141,7 @@ const addBook = (request, response) => {
 
   // if (responseCode === 201) {
   // responseJSON.message = 'Created Successfully';
-  return respondJSON(request, response, 201, 'Created Successfully');
+  return respondJSON(request, response, 201, newBook);
   // }
 
   // return respondJSON(request, response, responseCode, {});
@@ -185,7 +185,7 @@ const addGenre = (request, response) => {
     selectedBook.genres = [genre];
   }
 
-  return respondJSON(request, response, 204, {});
+  return respondJSON(request, response, 204, selectedBook);
 
   // users[name].age = age;
 
