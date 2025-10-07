@@ -39,11 +39,11 @@ const getBooksByQuery = (request, response, query, queryString) => {
   let booksByQuery = [];
 
   if (queryString === 'title') {
-    booksByQuery = bookData.filter((element) => element.title === query);
+    booksByQuery = bookData.filter((element) => element.title.toLowerCase() === query.toLowerCase());
   } else if (queryString === 'author') {
-    booksByQuery = bookData.filter((element) => element.author === query);
+    booksByQuery = bookData.filter((element) => element.author.toLowerCase() === query.toLowerCase());
   } else if (queryString === 'year') {
-    booksByQuery = bookData.filter((element) => element.year.toString() === query);
+    booksByQuery = bookData.filter((element) => element.year.toString().toLowerCase() === query.toLowerCase());
   }
 
   if (booksByQuery.length <= 0) {
