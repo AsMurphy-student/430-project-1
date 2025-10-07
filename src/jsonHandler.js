@@ -115,11 +115,11 @@ const addBook = (request, response) => {
   let updated = false;
 
   bookData.map((element, index) => {
-    if (element.title === newBook.title) {
+    if (element.title.toLowerCase() === newBook.title.toLowerCase()) {
       bookData[index] = newBook;
 
       updated = true;
-      respondJSON(request, response, 204, newBook);
+      respondJSON(request, response, 201, newBook);
     }
     return 0;
   });
@@ -150,7 +150,7 @@ const addBook = (request, response) => {
 // Add Genre Handler
 const addGenre = (request, response) => {
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'Title and Genre are both required.',
   };
 
   // Need to have
@@ -164,9 +164,9 @@ const addGenre = (request, response) => {
     return respondJSON(request, response, 400, responseJSON);
   }
 
-  let selectedBook = {};
+  let selectedBook;
   bookData.map((element) => {
-    if (element.title === title) {
+    if (element.title.toLowerCase() === title.toLowerCase()) {
       selectedBook = element;
     }
 
@@ -185,7 +185,7 @@ const addGenre = (request, response) => {
     selectedBook.genres = [genre];
   }
 
-  return respondJSON(request, response, 204, selectedBook);
+  return respondJSON(request, response, 201, selectedBook);
 
   // users[name].age = age;
 
