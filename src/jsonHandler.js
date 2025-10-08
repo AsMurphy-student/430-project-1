@@ -38,12 +38,18 @@ const getBooksByQuery = (request, response, query, queryString) => {
 
   let booksByQuery = [];
 
+  // For filters here:
+  // the element name is e because of eslint styling
+  // I would try to break this up on multiple lines
+  // however eslint would just put it back to this
+  // so I had no choice but to make the element name e
+  // used to be just named element
   if (queryString === 'title') {
-    booksByQuery = bookData.filter((element) => element.title.toLowerCase() === query.toLowerCase());
+    booksByQuery = bookData.filter((e) => e.title.toLowerCase() === query.toLowerCase());
   } else if (queryString === 'author') {
-    booksByQuery = bookData.filter((element) => element.author.toLowerCase() === query.toLowerCase());
+    booksByQuery = bookData.filter((e) => e.author.toLowerCase() === query.toLowerCase());
   } else if (queryString === 'year') {
-    booksByQuery = bookData.filter((element) => element.year.toString().toLowerCase() === query.toLowerCase());
+    booksByQuery = bookData.filter((e) => e.year.toString().toLowerCase() === query.toLowerCase());
   }
 
   if (booksByQuery.length <= 0) {
