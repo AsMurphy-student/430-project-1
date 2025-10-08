@@ -10,6 +10,7 @@ const getStruct = {
   '/': htmlHandler.getIndex,
   '/assets/index.css': htmlHandler.getCss,
   '/assets/index.js': htmlHandler.getJs,
+  '/assets/MartianMono-Regular.ttf': htmlHandler.getFont,
   '/getBooks': jsonHandler.getBooks,
   '/getBooksByTitle': jsonHandler.getBooksByTitle,
   '/getBooksByAuthor': jsonHandler.getBooksByAuthor,
