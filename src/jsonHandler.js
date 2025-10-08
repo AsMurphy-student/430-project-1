@@ -81,16 +81,6 @@ const addBook = (request, response) => {
     message: 'Name and age are both required.',
   };
 
-  // Need to have
-  // author
-  // country
-  // language
-  // link
-  // pages
-  // title
-  // year
-  // genres array
-
   const {
     author, country, language, link, pages, title, year, genres,
   } = request.body;
@@ -114,10 +104,6 @@ const addBook = (request, response) => {
     newBook.genres = genres.split(',');
   }
 
-  // console.log(newBook);
-
-  // let responseCode = 201;
-
   let updated = false;
 
   bookData.map((element, index) => {
@@ -136,21 +122,7 @@ const addBook = (request, response) => {
 
   bookData.push(newBook);
 
-  // if (!bookData[name]) {
-  //   responseCode = 201;
-  //   users[name] = {
-  //     name,
-  //   };
-  // }
-
-  // users[name].age = age;
-
-  // if (responseCode === 201) {
-  // responseJSON.message = 'Created Successfully';
   return respondJSON(request, response, 201, newBook);
-  // }
-
-  // return respondJSON(request, response, responseCode, {});
 };
 
 // Add Genre Handler
@@ -158,10 +130,6 @@ const addGenre = (request, response) => {
   const responseJSON = {
     message: 'Title and Genre are both required.',
   };
-
-  // Need to have
-  // title
-  // genre
 
   const { title, genre } = request.body;
 
@@ -192,15 +160,6 @@ const addGenre = (request, response) => {
   }
 
   return respondJSON(request, response, 201, selectedBook);
-
-  // users[name].age = age;
-
-  // if (responseCode === 201) {
-  // responseJSON.message = 'Created Successfully';
-  // return respondJSON(request, response, 201, "Created Successfully");
-  // }
-
-  // return respondJSON(request, response, responseCode, {});
 };
 
 module.exports = {
