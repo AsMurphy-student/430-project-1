@@ -111,7 +111,7 @@ const addBook = (request, response) => {
       bookData[index] = newBook;
 
       updated = true;
-      respondJSON(request, response, 201, newBook);
+      respondJSON(request, response, 204, {});
     }
     return 0;
   });
