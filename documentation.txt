@@ -1,6 +1,7 @@
 1. I am using the books data set that you provided.
-2. I have get requests setup for all books, query get requests for title, author, and year, and have post requests for submitting a book/updating a book, and a post request for adding a new genre to a book's genre array if or if it does not have one.
-3. I just have the client completed. I plan on making a super basic client page to confirm everything works, then I may back a better client page in React which I use more frequently.
-4. I have no plan for going above and beyond besides maybe the client being made in React if that counts. I am focusing on meeting the requirements first.
-5. The only code I have used is from you. I used HTTP 2 assignment as a starting point. The new code is just written by me with my Javascript knowledge.
+2. I felt that a React frontend may not be a good idea and too complicated but it turned out to be a great idea.
+3. I could have gone ahead and reformatted some of my frontend code with some more component and made the UI better. I also had issues early on with having too many props for some components but I realized so and leaned it down.
+4. I learned how to utilize the skills I have learned for node backend servers and integrated it with my skills with React for the frontend.
+5. I guess you could say the frontend with React Typescript, Vite, and Tailwind CSS is above and beyond. To be fair React isn't new to me nor is React Typescript (I prefer React with Typescript) and Tailwind CSS I also am used to. The only new thing really was just making it with the backend which was not too hard.
+6. The only code fragments I have are from you. All the rest of my code, both backend and frontend, are written by me for my use case.
 
